@@ -1,0 +1,28 @@
+dependencies:
+  espressif/led_strip:
+    component_hash: 28c6509a727ef74925b372ed404772aeedf11cce10b78c3f69b3c66799095e2d
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 2.5.5
+  idf:
+    source:
+      type: idf
+    version: 5.3.2
+  libwebsockets:
+    dependencies: []
+    source:
+      path: /home/guialves/wsl_test/components/libwebsockets
+      type: local
+    version: '*'
+direct_dependencies:
+- espressif/led_strip
+- idf
+- libwebsockets
+manifest_hash: ee5721e459928d964915b2e37d604a64ca5eb38540e8a2db75094e8f2035e709
+target: esp32s3
+version: 2.0.0
