@@ -56,10 +56,6 @@ static uint8_t s_led_state = 0;
 
 static led_strip_handle_t led_strip;
 
-#include <libwebsockets.h>
-#include <string.h>
-#include <signal.h>
-
 #define LWS_PLUGIN_STATIC
 #include "protocol_lws_minimal_server_echo.c"
 
@@ -92,16 +88,16 @@ static const struct lws_protocol_vhost_options pvo = {
 	"lws-minimal-server-echo",	/* protocol name we belong to on this vhost */
 	""				/* ignored */
 };
-// static const struct lws_extension extensions[] = {
-// 	{
-// 		"permessage-deflate",
-// 		lws_extension_callback_pm_deflate,
-// 		"permessage-deflate"
-// 		 "; client_no_context_takeover"
-// 		 "; client_max_window_bits"
-// 	},
-// 	{ NULL, NULL, NULL /* terminator */ }
-// };
+static const struct lws_extension extensions[] = {
+	{
+		"permessage-deflate",
+		lws_extension_callback_pm_deflate,
+		"permessage-deflate"
+		 "; client_no_context_takeover"
+		 "; client_max_window_bits"
+	},
+	{ NULL, NULL, NULL /* terminator */ }
+};
 
 void sigint_handler(int sig)
 {
@@ -213,6 +209,9 @@ static void configure_led(void)
 
 void app_main(void)
 {
+    while(esp_log_timestamp() < (2*1000)) {
+  	    vTaskDelay(200);
+    }
     wifi_connection();
 
     /* Configure the peripheral according to the LED type */
@@ -241,6 +240,7 @@ void app_main(void)
 	info.protocols = protocols;
 	info.pvo = &pvo;
 	info.pt_serv_buf_size = 32 * 1024;
+    info.extensions = extensions;
 	info.options = LWS_SERVER_OPTION_VALIDATE_UTF8 |
 		LWS_SERVER_OPTION_HTTP_HEADERS_SECURITY_BEST_PRACTICES_ENFORCE;
 
@@ -259,7 +259,10 @@ void app_main(void)
 
 
 	while (n >= 0 && !interrupted)
-		n = lws_service(context, 0);
+    {
+       n = lws_service(context, 0);
+        vTaskDelay(1 / portTICK_PERIOD_MS);
+    }
 
 	lws_context_destroy(context);
 
