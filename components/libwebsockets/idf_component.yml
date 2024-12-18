@@ -1,4 +1,0 @@
-version: "*"
-description: lws.
-dependencies:
-  idf: ">=4.1"
