@@ -16,13 +16,13 @@ dependencies:
   libwebsockets:
     dependencies: []
     source:
-      path: /home/guialves/wsl_test/components/libwebsockets
+      path: /home/guialves/esp-lws/components/libwebsockets
       type: local
     version: '*'
 direct_dependencies:
 - espressif/led_strip
 - idf
 - libwebsockets
-manifest_hash: ee5721e459928d964915b2e37d604a64ca5eb38540e8a2db75094e8f2035e709
-target: esp32s3
+manifest_hash: f3a3213028de6bfb239bfbf163776ead4665de761dc0209ae393a6cb95757ed5
+target: esp32
 version: 2.0.0

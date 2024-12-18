@@ -2,4 +2,4 @@ dependencies:
   espressif/led_strip: "^2.4.1"
   libwebsockets: 
     version: "*"
-    override_path: '/home/guialves/wsl_test/build/esp-idf/libwebsockets/libwebsockets'
+    override_path: '/home/guialves/esp-lws/build/esp-idf/libwebsockets/libwebsockets'
