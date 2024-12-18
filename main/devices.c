@@ -35,20 +35,20 @@ lws_netdev_instance_wifi_t *wnd;
  * of the switch connected to 0V.
  */
 
-static const lws_button_map_t bcm[] = {
-	{
-		.gpio			= GPIO_NUM_14,
-		.smd_interaction_name	= "user"
-	},
-};
+// static const lws_button_map_t bcm[] = {
+// 	{
+// 		.gpio			= GPIO_NUM_14,
+// 		.smd_interaction_name	= "user"
+// 	},
+// };
 
-static const lws_button_controller_t bc = {
-	.smd_bc_name			= "bc",
-	.gpio_ops			= &lws_gpio_plat,
-	.button_map			= &bcm[0],
-	.active_state_bitmap		= 0,
-	.count_buttons			= LWS_ARRAY_SIZE(bcm),
-};
+// static const lws_button_controller_t bc = {
+// 	.smd_bc_name			= "bc",
+// 	.gpio_ops			= &lws_gpio_plat,
+// 	.button_map			= &bcm[0],
+// 	.active_state_bitmap		= 0,
+// 	.count_buttons			= LWS_ARRAY_SIZE(bcm),
+// };
 
 /*
  * pwm controller
@@ -244,13 +244,13 @@ init_plat_devices(struct lws_context *ctx)
 
 	/* ... and the button controller */
 
-	bcs = lws_button_controller_create(ctx, &bc);
-	if (!bcs) {
-		lwsl_err("%s: could not create buttons\n", __func__);
-		return 1;
-	}
+	// bcs = lws_button_controller_create(ctx, &bc);
+	// if (!bcs) {
+	// 	lwsl_err("%s: could not create buttons\n", __func__);
+	// 	return 1;
+	// }
 
-	lws_button_enable(bcs, 0, lws_button_get_bit(bcs, "user"));
+	// lws_button_enable(bcs, 0, lws_button_get_bit(bcs, "user"));
 
 	/* ... bring up spi bb and the display */
 
